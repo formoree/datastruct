@@ -26,14 +26,30 @@ void PreOrder(BiTree T){
 //算法复杂度为n
 
 //中序递归非遍历算法
-void QPreOrder(BiTree T){
+void QMidOrder(BiTree T){
     stack<BiTree>S;BiTree p=T;
-    if(p||!S.empty()){
+    while(p||!S.empty()){
         if(p){
             S.push(p);
             p = p->lchild;
         }else{
+            p = S.top();
             S.pop();visit(p);
+            p = p->rchild;
+        }
+    }
+}
+
+//先序递归非遍历算法
+void QPreOrder(BiTree T){
+    stack<BiTree>S;BiTree p=T;
+    while(p||!S.empty()){
+        if(p){
+            visit(p);
+            S.push(p);
+            p = p->lchild;
+        }else{
+            S.pop();
             p = p->rchild;
         }
     }
@@ -44,7 +60,7 @@ void LeverOrder(BiTree T){
     queue<BiTree>Q;
     BiTree p;
     Q.push(T);
-    if(!Q.empty()){
+    while(!Q.empty()){
         p=Q.front();
         Q.pop();
         visit(p);
@@ -72,7 +88,7 @@ void CreatBTree(BiTree &T)
 int main(){
     BiTree T;
     CreatBTree(T);
-    LeverOrder(T);
+    QMidOrder(T);
     return 0;
 }
 
