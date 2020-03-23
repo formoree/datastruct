@@ -1,0 +1,48 @@
+//双亲表示法
+#define maxsize 10
+typedef struct {
+    Elemtype data;
+    int parent;
+}PTNode;
+
+typedef struct{
+    PTNode nodes[maxsize];
+    int n;
+}PTree;
+
+//孩子表示法（单链表存储孩子节点）
+typedef struct {
+    int child;
+    struct CNode *next;
+}CNode;
+
+typedef  struct {
+    Elemtype data;
+    struct CNode *child;
+}PNode;
+
+typedef struct {
+    PNode nodes[maxsize];
+    int n ;
+}CTree;
+
+//孩子兄弟表示法 （左孩子有兄弟表示法）
+//优点：寻找结点的孩子结点效率高 方便实现树转化为二叉树
+//缺点： 寻找双结点的效率低
+typedef struct {
+    Elemtype data;
+    struct CSNode *firstchild,*nextsibling;
+}CSNode,CSTree;
+
+树、二叉树和森林的相互转换
+树与二叉树的转化：每个结点指向它的第一个孩子节点，右指针指向它在树中相邻兄弟节点
+二叉树转化为树  ：逆过程；将兄弟节点的指针都指向父亲节点
+森林与二叉树的转化： 森林->树->二叉树（将根作为一颗子树，连接起来）
+
+//树的先根遍历与这棵树对应二叉树的先序遍历序列相同
+//树的后根遍历与这棵树对应二叉树的中序遍历序列相同
+
+//森林的先序遍历：先遍历第一颗树的根
+//森林的先根遍历与这棵树对应二叉树的先序遍历序列相同
+//森林的中序遍历：先遍历第一棵树的子树
+//森林的中根遍历与这棵树对应二叉树的中序遍历序列相同
